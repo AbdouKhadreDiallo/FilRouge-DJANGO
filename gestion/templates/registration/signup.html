@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load materializecss %}
+{% block style %}
+  <style>
+  </style>
+{% endblock style %}
+{% block content %}
+<div class="row ml-5">
+    <div  class="col-md-7 col-sm-8 col-8 text-center">
+        {{action}} {{user_type}}
+        <hr>
+    </div>
+</div>
+<div class="row ml-5">
+    <div class="col-md-7 shadow col-sm-8 col-8">
+      <form method="post" novalidate enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {{ form|materializecss }}
+        <div class="text-center mb-2">
+
+          <button type="submit" class="btn btn-success">{{action}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock content %}
+{% block javascript %}
+  <script>
+      $('.input-field ul').hide()
+      $('.input-field p').hide()
+
+      $('#id_password2').keyup(function() {
+        //alert('yes')
+        if ($('#id_password2').val() != $('#id_password1').val()) {
+          $('#id_password2').addClass('invalid')
+        }
+        else{
+          $('#id_password2').addClass('valid')
+        }
+      })
+  </script>
+{% endblock javascript %}

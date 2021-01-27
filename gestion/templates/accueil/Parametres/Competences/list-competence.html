@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load materializecss %}
+
+{% block content%}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="input-field col s12">
+            <select onchange="javascript:handleSelect(this)">
+                {% for competence in competences %}
+                <option value="{% url 'admin:detail_competence' competence.id %}"> {{competence.libelle}} </option>
+                {% endfor %}
+            </select>
+            <ul class="collection">
+                {% for competences in groupeCompetence.competences.all %}
+                <li class="collection-item"> <a href=" {% url 'admin:detailCompetence' competences.id  %} ">{{competences.libelle}} </a></li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col s12">
+            <ul class="tabs">
+                
+                <li class="tab col s3"><a class="active" href="#niveau1">Niveau 1</a></li>
+                <li class="tab col s3"><a  href="#niveau2">Niveau 2</a></li>
+                <li class="tab col s3"><a href="#niveau3">Niveau 3</a></li>
+
+            </ul>
+        </div>
+        {% for compet in  competence.niveaux.all %}
+        <div id="niveau{{forloop.counter}}" class="col s12 row">
+            <div class="col s6"> {{compet.groupeAction}} </div>
+            <div class="col s6"> {{compet.critereEvaluation}} </div>
+        </div>
+        {% endfor %}
+       
+    </div>
+</div>
+
+{% endblock content%}
+{% block javascript %}
+<script>
+    // if ($('select option').val() == "1") {
+    //     $(this).css('select', 'selected')
+    // }
+    $("select option").each(function () {
+        if ($(this).val() == "3")
+            alert("hehe")
+        $(this).css("selected", "selected");
+    });
+
+    function handleSelect(elm) {
+        window.location = "http://127.0.0.1:8000" + elm.value;
+    }
+</script>
+{% endblock javascript %}

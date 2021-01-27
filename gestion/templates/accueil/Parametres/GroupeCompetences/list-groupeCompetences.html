@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load materializecss %}
+{% block content %}
+<div class="text-center mb-4 font-weight-bold">
+    <span >Liste des groupes de compétences</span>
+	<a href="{% url 'admin:add_grpCompetences' %}" class="btn-floating  btn-small waves-effect waves-light red float-right mr-3 mt-2 mb-2" data-target='dropdown4'><i class="material-icons">add</i></a>
+</div>
+<div class="row">
+    {% for groupeComptence in groupeComptence %}
+    <div class="col s4">
+        <ul class="collapsible">
+            <li >
+                <div class="collapsible-header">
+                    <div class="float-left">
+                        <div><span>{{ groupeComptence.libelle }}</span></div>
+                    </div>
+                    <div class="float-right">
+                        <a href="{% url 'admin:edit_grpCompetences' groupeComptence.id %}" class="float-right"> <i class="material-icons">edit</i> </a>
+                        <a href="" class="float-right"> <i class="material-icons">delete</i> </a>
+                    </div>
+                </div>
+            </li>
+            <li class="active">
+                <div class="collapsible-header">Description</div>
+                <div class="collapsible-body"><span> {{ groupeComptence.description }} </span></div>
+            </li>
+            <li>
+                <div class="collapsible-header">Compétences</div>
+                <div class="collapsible-body">
+                    <ul class="collection">
+
+                        {% for competence in  groupeComptence.competences.all %}
+                        <li class="collection-item">
+                            {{ competence.libelle}}
+                        </li>
+                       
+                          
+                        {% endfor %}
+                    </ul>
+                    <!-- <div class="collapsible-body">
+                {% for competence in competence %}
+                    <li> {{competence.libelle}} </li>
+    
+                {% endfor %}
+                
+            </div> -->
+                </div>
+            </li>
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

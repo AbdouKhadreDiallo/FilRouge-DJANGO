@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load materializecss %}
+{% block content %}
+<div class="row ml-5">
+    <div  class="col-md-7 col-sm-8 col-8 text-center">
+        Ajouter un Referentiel
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-7 col-sm-8 col-8 ml-5">
+
+        <form action="" method="post" class="shadow" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form|materializecss}}
+            <div class="text-center">
+                <button class="btn btn-primary mb-4"> Ajouter </button>
+            </div>
+        </form>
+    </div>
+</div>
+  
+{% endblock content %}

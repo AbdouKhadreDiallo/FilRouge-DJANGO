@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load materializecss %}
+{% block content %}
+<div class="text-center mb-4 font-weight-bold">
+    <span >Liste des groupes de compétences</span>
+	<a href="{% url 'admin:add_ref' %}" class="btn-floating  btn-small waves-effect waves-light red float-right mr-3 mt-2 mb-2" data-target='dropdown4'><i class="material-icons">add</i></a>
+</div>
+<div class="row">
+    <div class="col s4">
+        <ul class="collapsible">
+            <li >
+                <div class="collapsible-header">
+                    <div class="float-left">
+                        <div><span>{{ referentiel.libelle }}</span></div>
+                    </div>
+                    
+                </div>
+            </li>
+            <li class="active">
+                <div class="collapsible-header">Presentation</div>
+                <div class="collapsible-body"><span> {{ referentiel.presentation }} </span></div>
+            </li>
+            <li>
+                <div class="collapsible-header">Critere d'admission</div>
+                <div class="collapsible-body"><span> {{ referentiel.critereAdmission }} </span></div>
+            </li>
+            <li>
+                <div class="collapsible-header">Critere d'évaluation</div>
+                <div class="collapsible-body"><span> {{ referentiel.critereEvaluation }} </span></div>
+            </li>
+            <li>
+                <div class="collapsible-header">Programme</div>
+                <div class="collapsible-body"><span> {{ referentiel.programme }} </span></div>
+            </li>
+            <li>
+                <div class="collapsible-header">Groupe de Competence</div>
+                <div class="collapsible-body">
+                    <ul class="collection">
+                        {% for grp in referentiel.groupeCompetences.all %}
+                            <li class="collection-item"> {{grp.libelle}} </li>
+                        {% endfor %}
+                    </ul>
+                    
+                </div>
+            </li>
+
+            <!-- <li>
+                <div class="collapsible-header">Compétences</div>
+                <div class="collapsible-body">
+                    <ul class="collection">
+
+                        {% for competence in  ref.competences.all %}
+                        <li class="collection-item">
+                            {{ competence.libelle}}
+                        </li>
+                       
+                          
+                        {% endfor %}
+                    </ul>
+                   
+                </div>
+            </li> -->
+        </ul>
+    </div>
+</div>
+{% endblock content %}

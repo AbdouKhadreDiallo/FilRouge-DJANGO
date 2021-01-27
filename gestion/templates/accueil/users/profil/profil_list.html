@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load materializecss %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-6">
+            <table class="striped highlight shadow">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Libelle</th>
+                        <th scope="col" >Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for profil in profil_list %}
+                    <tr>
+                        <th scope="row"> {{profil.id}} </th>
+                        <td>{{profil.libelle}}</td>
+                        <td>
+                            <a href="{% url 'admin:update_profil' profil.id %}" class="btn-floating btn-small tooltipped waves-effect waves-light yellow"
+                            data-position="top" data-tooltip="Edit"><i class="material-icons">edit</i></a>
+                            
+    
+                            <a href="{% url 'admin:delete_profil' profil.id %}" data-target="" class="waves-effect waves-light btn modal-trigger open-incident"> <i
+                                    class="material-icons">delete</i> </a>
+                            <a href="{% url 'admin:detail_profil' profil.id %}" class="btn-floating btn-small tooltipped waves-effect waves-light yellow"
+                                data-position="top" data-tooltip="Detail"> <i class="material-icons">details</i> </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+    
+        </div>
+        <div class="col">
+            <div>
+                <h3>{{ top }}</h3>
+                <hr>
+            </div>
+            
+            <form class="shadow" method="post">
+                {% csrf_token %}
+                {{form|materializecss}}
+                <div class="text-center">
+                    <button class="btn btn-primary mb-4"> {{btn}} </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
